@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Mint Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .counterinput {
+            background: none;
+            color: #ccb256;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 37px;
+            width: 200px;
+            font-weight: 800;
+            font-family: Outfit, sans-serif;
+            padding-bottom: 25px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <style>
+        .pushableBtn {
+            background: hsl(47, 54%, 70%);
+            border-radius: 12px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+        }
+
+        .pushable-inner {
+            display: block;
+            border-radius: 12px;
+            background: hsl(47, 54%, 57%);
+            color: white;
+            transform: translateY(-6px);
+            font-size: 28px;
+            min-width: 43px;
+            padding: 0 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+            height: 35px;
+        }
+
+        .pushable-inner.small {
+            font-size: 20px;
+        }
+
+
+        .pushableBtn:active .pushable-inner {
+            transform: translateY(-2px);
+        }
+
+
+        .hitCountAnimate {
+            animation: hitCountAnimate 0.5s ease-in;
+        }
+
+        @keyframes hitCountAnimate {
+
+            from,
+            to {
+                transform: scale(1, 1);
+            }
+
+            25% {
+                transform: scale(0.7, 1.3);
+            }
+
+            50% {
+                transform: scale(1.3, 0.8);
+            }
+
+            75% {
+                transform: scale(0.95, 1.05);
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        .shakeanimate {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="home-container">
+        <section class="home-header-container">
+            <h1>Welcome to <span>Mint Repeater</span></h1>
+            <p>Its developed only for Inscription mints. <strong>Your private key is not saved.</strong> However, you
+                should still use a burner wallet. DYOR.
+            </p>
+            <h2 style="color: #ccb256;padding-top: 40px;font-size: 28px;display: flex;align-items: center;gap: 10px;">
+                COUNT
+            </h2>
+            <div>
+                <div
+                    style="color: #a58b29;padding-top: 30px;font-size:32px;display: flex;align-items: center;gap: 10px;">
+                    <button class="pushableBtn" data-upper-count="100" data-upper-type="up">
+                        <span class="pushable-inner small">
+                            +100
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="10" data-upper-type="up">
+                        <span class="pushable-inner small">
+                            +10
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="5" data-upper-type="up">
+                        <span class="pushable-inner small">
+                            +5
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="1" data-upper-type="up">
+                        <span class="pushable-inner">
+                            +
+                        </span>
+                    </button>
+                    <input class="counterinput " type="number" value="1" id="countVal">
+                    <button class="pushableBtn">
+                        <span class="pushable-inner" data-upper-count="1" data-upper-type="down">
+                            -
+                        </span>
+                    </button>
+
+                    <button class="pushableBtn" data-upper-count="5" data-upper-type="down">
+                        <span class="pushable-inner small">
+                            -5
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="10" data-upper-type="down">
+                        <span class="pushable-inner small">
+                            -10
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="50" data-upper-type="down">
+                        <span class="pushable-inner small">
+                            -50
+                        </span>
+                    </button>
+                    <button class="pushableBtn" data-upper-count="100" data-upper-type="down">
+                        <span class="pushable-inner small">
+                            -100
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="home-search-container">
+            <div class="search-container">
+                <button onclick="clickbtn()" class="search-button-left" type="submit" style="color: #907515;">Start
+                    Mint</button>
+                <input id="privateVal" type="text" placeholder="Write Private Key" name="search">
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="bundle.js"></script>
+    <script>
+        $("[data-upper-count]").click(function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+            var type = $this.data("upper-type");
+            var count = $this.data("upper-count");
+            var input = $("#countVal");
+            var val = parseInt(input.val());
+            input.removeClass("hitCountAnimate");
+
+            setTimeout(function () {
+                input.addClass("hitCountAnimate");
+            }, 1);
+            if (type == "up") {
+                val = val + count;
+            } else {
+                val = val - count;
+            }
+            if (val < 1) {
+                input.val(1);
+                return;
+            }
+            input.val(val);
+        });
+        $("#countVal").keyup(function (e) {
+            e.preventDefault();
+            var input = $("#countVal");
+            var val = parseInt(input.val());
+            console.log(val);
+            if (val == null || val == undefined || val == "" || isNaN(val)) {
+                input.val(1);
+                return;
+            }
+            if (val < 1) {
+                input.val(1);
+                return;
+            }
+
+        });
+    </script>
+</body>
+
+</html>
